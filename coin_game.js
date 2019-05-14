@@ -105,21 +105,31 @@ for (let i = 0; i < 8; i++) {
   asset.push(document.getElementById(`${resourceId[i]}Asset`));
 }
 
-let coins = 0;
+let coins = 1000000;
 let cps = 0;
 let clicks = 0;
 let timeout = 40000;
 let maxBonusTimeout = 60000;
 let bonus = 0;
 
+const counterWrapper = document.createElement("div");
+
+function createCounter() {
+  counterWrapper.innerText = Math.floor(coins) + "\n" + "coins";
+  counterWrapper.classList.add("counterWrapper");
+  body.appendChild(counterWrapper);
+}
+
+createCounter();
+
 function updateCounter() {
   coins += cps / 100;
-  if (coins > 999999999) {
-    counterWrapper.innerText =
-      (coins / 1000000000).toFixed(2) + "\n" + " billion" + "\n" + "coins";
-  } else if (coins > 999999) {
+  if (coins > 999999) {
     counterWrapper.innerText =
       (coins / 1000000).toFixed(2) + " million" + "\n" + "coins";
+  } else if (coins > 999999999) {
+    counterWrapper.innerText =
+      (coins / 1000000000).toFixed(2) + "\n" + " billion" + "\n" + "coins";
   } else {
     counterWrapper.innerText = Math.floor(coins) + "\n" + "coins";
   }
@@ -137,22 +147,8 @@ function updateCounter() {
   }
 }
 
-function playSounds(sound) {
-  sounds.buy.pause();
-  sounds.coin.pause();
-  sounds[sound].currentTime = 0;
-  sounds[sound].play();
-}
-
-const counterWrapper = document.createElement("div");
-
-function createCounter() {
-  counterWrapper.innerText = Math.floor(coins) + "\n" + "coins";
-  counterWrapper.classList.add("counterWrapper");
-  body.appendChild(counterWrapper);
-}
-
-createCounter();
+let interval = setInterval(() => updateCounter(), 10);
+hide(popup);
 
 function game() {
   if (cps === 0) coins += 1;
@@ -183,6 +179,18 @@ function updateAsset(resource, num) {
   asset[num].appendChild(assetImg);
 }
 
+function setupResource(button, resource, asset) {
+  if (resource.owned > 0) asset.style.opacity = "1";
+  if (coins < resource.cost / 2 && resource.owned === 0) hide(button);
+  if (coins >= resource.cost / 2) show(button);
+  button.style.opacity = "0.5";
+  if (coins >= resource.cost) button.style.opacity = "1";
+}
+
+for (let i = 0; i < 8; i++) {
+  setInterval(() => setupResource(button[i], resources[i], asset[i]), 100);
+}
+
 function createOwnedCounter(object, resource) {
   let ownedCounter = document.createElement("div");
   ownedCounter.innerText = `${resource.owned}`;
@@ -205,7 +213,7 @@ function createBonusCoin() {
   body.appendChild(bonusCoin);
   bonusCoin.addEventListener("click", bonusCoinClick);
   let x2 = setTimeout(createBonusCoin, getRandom(0, maxBonusTimeout));
-  x4 = setTimeout(function() {
+  x4 = setTimeout(() => {
     body.removeChild(bonusCoin);
   }, 10000);
 }
@@ -218,10 +226,6 @@ function bonusCoinClick() {
   createBonusCoinCpsCounter(bonus);
 }
 
-function getRandom(min, max) {
-  return Math.floor(Math.random() * max) + min;
-}
-
 let x1 = setTimeout(createBonusCoin, timeout);
 
 function createCpsCounter() {
@@ -231,7 +235,7 @@ function createCpsCounter() {
   if (cps === 0) cpsCounter.innerText = "+1";
   cpsCounter.classList.add("cpsCounter");
   body.appendChild(cpsCounter);
-  x3 = setTimeout(function() {
+  x3 = setTimeout(() => {
     body.removeChild(cpsCounter);
   }, 500);
 }
@@ -294,8 +298,16 @@ let achievements = [
   }
 ];
 
-let interval = setInterval(() => updateCounter(), 10);
-hide(popup);
+function getRandom(min, max) {
+  return Math.floor(Math.random() * max) + min;
+}
+
+function playSounds(sound) {
+  sounds.buy.pause();
+  sounds.coin.pause();
+  sounds[sound].currentTime = 0;
+  sounds[sound].play();
+}
 
 function closeMessage() {
   hide(popup);
@@ -307,33 +319,4 @@ function hide(element) {
 
 function show(element) {
   element.style.display = "block";
-}
-
-function changeBackgroundImg() {
-  if (cps > 1000)
-    document.getElementById("sidebar").style.backgroundImage =
-      "url ('imgs/fallingcoins0.gif')";
-  sidebar.classList.add("backgroundImg");
-
-  if (cps > 100000)
-    document.getElementById("sidebar").style.backgroundImage =
-      "url ('imgs/fallingcoins1.gif')";
-  sidebar.classList.add("backgroundImg");
-
-  if (cps > 1000000)
-    document.getElementById("sidebar").style.backgroundImage =
-      "url ('imgs/fallingcoins2.gif')";
-  sidebar.classList.add("backgroundImg");
-}
-
-function setupResource(button, resource, asset) {
-  if (resource.owned > 0) asset.style.opacity = "1";
-  if (coins < resource.cost / 2 && resource.owned === 0) hide(button);
-  if (coins >= resource.cost / 2) show(button);
-  button.style.opacity = "0.5";
-  if (coins >= resource.cost) button.style.opacity = "1";
-}
-
-for (let i = 0; i < 8; i++) {
-  setInterval(() => setupResource(button[i], resources[i], asset[i]), 100);
 }

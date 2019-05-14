@@ -3,8 +3,6 @@ body {
 }
 
 #container {
-  min-height: 100%;
-  width: 100%;
   display: grid;
   grid-template-rows: repeat(8, 100px);
   grid-template-columns: 1fr 2fr 1fr;
@@ -19,8 +17,10 @@ body {
   border-right: 5px solid #e6ac00;
   background-color: #171515;
 }
+
 .assets {
   opacity: 0;
+  background-color: #292828;
 }
 
 .asset {
@@ -35,6 +35,13 @@ body {
   height: 100px;
   vertical-align: top;
   padding-right: 5px;
+}
+
+.btn {
+  background-color: #292828;
+  padding-right: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .button {
@@ -60,13 +67,6 @@ body {
 
 .button:focus {
   outline: 0;
-}
-
-.btn {
-  background-color: #292828;
-  padding-right: 5px;
-  display: flex;
-  flex-direction: column;
 }
 
 .text {
@@ -147,13 +147,22 @@ body {
   font-family: "Courier New", Courier, monospace;
   color: #e6ac00;
   text-align: center;
-  display: inline-block;
   box-sizing: border-box;
   border: 2px solid #e6ac00;
   background-color: #292828;
   position: absolute;
-  top: 99%;
-  left: 50%;
+  top: 100%;
+  left: 40%;
+  animation: popupSlidein 0.5s ease-in-out;
+}
+
+@keyframes popupSlidein {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 #close-btn {
@@ -166,16 +175,18 @@ body {
   position: absolute;
   padding: 4px;
   opacity: 1;
+  color: white;
 }
 
 .cpsCounter {
   display: inline-block;
   position: absolute;
-  font-size: 30px;
+  font-size: 35px;
   font-family: "Courier New", Courier, monospace;
   color: white;
+  font-weight: bold;
   z-index: 1;
-  left: 15%;
+  left: 14%;
   animation-name: cpsAnimation;
   animation-duration: 0.5s;
 }
@@ -194,9 +205,10 @@ body {
 .bonusCoinCpsCounter {
   display: inline-block;
   position: absolute;
-  font-size: 30px;
+  font-size: 35px;
   font-family: "Courier New", Courier, monospace;
   color: white;
+  font-weight: bold;
   z-index: 1;
   left: 15%;
   animation-name: cpsAnimation;
@@ -212,8 +224,4 @@ body {
     top: 80%;
     opacity: 0;
   }
-}
-
-.assets {
-  background-color: #292828;
 }
