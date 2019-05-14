@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="coin_game_grid.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="sidebar">
+        <img
+          class="coin_button"
+          id="coin"
+          src="imgs/coin.png"
+          onclick="game()"
+        />
+      </div>
+      <div class="assets" id="minerAsset"></div>
+      <div class="btn" id="minerResource" onclick="buy(miner, 0)">
+        <button class="button" id="minerRes">
+          <img src="imgs/miner.jpeg" class="resource" />
+          <p class="text">
+            Miner <br />
+            <img src="imgs/coin.png" class="icon" /> 50
+          </p>
+        </button>
+      </div>
+      <div class="assets" id="computerAsset"></div>
+      <div class="btn" id="computerResource" onclick="buy(computer, 1)">
+        <button class="button" id="computerRes">
+          <img src="imgs/computer.png" class="resource" />
+          <p class="text">
+            Computer <br />
+            <img src="imgs/coin.png" class="icon" /> 500
+          </p>
+        </button>
+      </div>
+      <div class="assets" id="datacenterAsset"></div>
+      <div class="btn" id="datacenterResource" onclick="buy(datacenter, 2)">
+        <button class="button" id="datacenterRes">
+          <img src="imgs/datacenter.png" class="resource" />
+          <p class="text">
+            Data center <br />
+            <img src="imgs/coin.png" class="icon" /> 2000
+          </p>
+        </button>
+      </div>
+      <div class="assets" id="supercomputerAsset"></div>
+      <div
+        class="btn"
+        id="supercomputerResource"
+        onclick="buy(supercomputer, 3)"
+      >
+        <button class="button" id="supercomputerRes">
+          <img src="imgs/supercomputer.jpg" class="resource" />
+          <p class="text">
+            Super computer <br />
+            <img src="imgs/coin.png" class="icon" /> 50000
+          </p>
+        </button>
+      </div>
+      <div class="assets" id="quantumcomputerAsset"></div>
+      <div
+        class="btn"
+        id="quantumcomputerResourse"
+        onclick="buy(quantumComputer, 4)"
+      >
+        <button class="button" id="quantumcomputerRes">
+          <img src="imgs/quantumcomputer.jpg" class="resource" />
+          <p class="text">
+            Quantum computer <br />
+            <img src="imgs/coin.png" class="icon" /> 200000
+          </p>
+        </button>
+      </div>
+      <div class="assets" id="AIAsset"></div>
+      <div class="btn" id="AIResourse" onclick="buy(aI, 5)">
+        <button class="button" id="AIRes">
+          <img src="imgs/AI.png" class="resource" />
+          <p class="text">
+            AI <br />
+            <img src="imgs/coin.png" class="icon" /> 5000000
+          </p>
+        </button>
+      </div>
+      <div class="assets" id="matrioshkaAsset"></div>
+      <div
+        class="btn"
+        id="matrioshkaResource"
+        onclick="buy(matrioshkaBrain, 6)"
+      >
+        <button class="button" id="matrioshkaRes">
+          <img src="imgs/matrioshka.jpg" class="resource" />
+          <p class="text">
+            Matrioshka brain <br />
+            <img src="imgs/coin.png" class="icon" /> 20000000
+          </p>
+        </button>
+      </div>
+      <div class="assets" id="simulationAsset"></div>
+      <div class="btn" id="simulationResource" onclick="buy(simulation, 7)">
+        <button class="button" id="simulationRes">
+          <img src="imgs/simulation.jpg" class="resource" />
+          <p class="text">
+            Simulation <br />
+            <img src="imgs/coin.png" class="icon" /> 1000000000
+          </p>
+        </button>
+      </div>
+      <div id="popup">
+        <button id="close-btn" onclick="closeMessage()">X</button>
+        <p id="popupMessage">
+          From ...
+        </p>
+      </div>
+    </div>
+    <script src="coin_game.js"></script>
+  </body>
+</html>
